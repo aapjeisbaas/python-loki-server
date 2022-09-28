@@ -1,0 +1,13 @@
+build:
+  image: docker:latest
+  services:
+  - docker:dind
+  variables:
+    CI_APPLICATION_REPOSITORY: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG
+    CI_APPLICATION_TAG: $CI_COMMIT_SHA
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+    - docker build -t ${CI_APPLICATION_REPOSITORY}:${CI_APPLICATION_TAG} .
+    - docker tag ${CI_APPLICATION_REPOSITORY}:${CI_APPLICATION_TAG} ${CI_REGISTRY_IMAGE}:latest
+    - docker push ${CI_APPLICATION_REPOSITORY}:${CI_APPLICATION_TAG}
+    - docker push ${CI_REGISTRY_IMAGE}:latest
