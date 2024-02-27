@@ -90,10 +90,11 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
 def run(server_class=http.server.ThreadingHTTPServer, handler_class=Handler):
     """Run the server."""
-    print("Starting server on port 8080...")
+    print("Starting http server")
     server_address = ("", 8080)
     httpd = server_class(server_address, handler_class)
     httpd.serve_forever()
 
 
-run()
+if __name__ == "__main__":
+    run()
