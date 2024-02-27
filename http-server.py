@@ -6,7 +6,7 @@ import os
 import logging
 
 CRAP_SIZE = 1024 * 1024 * 100  # 100MB
-CRAP_INIT = os.urandom(CRAP_SIZE)
+CRAP_DATA = os.urandom(CRAP_SIZE)
 
 open_close = [('''
 <SOAP-ENV:Envelope
@@ -43,7 +43,7 @@ def random_response_builder(wrap_num):
         ((CRAP_SIZE) - size) / 2
     )  # set start point on half of the excess crap outside chosen size to slice out the center instead of from beginning
     slice_obj = slice(start, (start + size))  # create the slicer
-    crap = CRAP_INIT[slice_obj]  # slice the crap
+    crap = CRAP_DATA[slice_obj]  # slice the crap
     craptastic = (
         str.encode(open_close[wrap_num][0]) + crap + str.encode(open_close[wrap_num][1])
     )  # wrap the crap in something nice
