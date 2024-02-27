@@ -1,3 +1,0 @@
-pyinstaller
-staticx
-patchelf-wrapper
