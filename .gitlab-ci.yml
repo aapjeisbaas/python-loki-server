@@ -14,5 +14,3 @@ daemonless:
         --frontend=dockerfile.v0 \
         --local context=. \
         --local dockerfile=.
-  tags:
-  - docker
